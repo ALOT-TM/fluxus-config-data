@@ -3,12 +3,12 @@ server:
 
 spring:
   rabbitmq:
-    host: localhost
+    host: ${RABBITMQ_HOST:localhost}
     port: 5672
     username: guest
     password: guest
   datasource:
-    url: jdbc:mysql://localhost:3306/fluxus_donations_logistics?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/fluxus_donations_logistics?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: root
     password: password
   jpa:
@@ -26,15 +26,15 @@ authorization:
 
 services:
   shrinkage:
-    base-url: http://localhost:8103
+    base-url: ${SHRINKAGE_SERVICE_URL:http://localhost:8103}
   beneficiaries:
-    base-url: http://localhost:8102
+    base-url: ${BENEFICIARIES_SERVICE_URL:http://localhost:8102}
   authaccess:
-    base-url: http://localhost:8094
+    base-url: ${AUTH_SERVICE_URL:http://localhost:8094}
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_SERVER_URL:http://localhost:8761/eureka/}
   instance:
     prefer-ip-address: true
